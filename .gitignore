@@ -1,0 +1,4 @@
+# Ignore the build folder
+build
+# Ignore gralde useless folder
+.gradle

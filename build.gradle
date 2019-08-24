@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'me.alexpado.pmc'
+version '1.0-SNAPSHOT'
+
+// === Change this to match the workspace defined inside the start.sh script.
+String workspace = '.papermc'
+
+sourceCompatibility = 1.8
+
+repositories() {
+    mavenCentral()
+    maven { url 'https://papermc.io/repo/repository/maven-public/' }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'com.destroystokyo.paper', name: 'paper-api', version: '1.14.4-R0.1-SNAPSHOT'
+}
+
+jar {
+    String userHome = System.properties['user.home']
+    destinationDirectory = file("$userHome/$workspace/plugins")
+    archiveFileName = project.name + ".jar"
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
