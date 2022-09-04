@@ -1,4 +1,4 @@
-package me.alexpado.pmc;
+package io.alexpado.pmc;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
