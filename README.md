@@ -45,4 +45,6 @@ of `PAPER_BUILD`.  You'll probably need to rebuild the image.
 2. Probably accept EULA in `eula.txt` and modify your server properties.
 3. Enjoy
 
+*Or simply use the `Start Local` run configuration in IntelliJ...*
+
 > If you want to download a new jar file, you'll have to remove the existing one.

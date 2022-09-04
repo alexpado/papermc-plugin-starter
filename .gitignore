@@ -4,4 +4,3 @@ build
 
 .idea/*
 !.idea/runConfigurations
-!.idea/inspectionProfiles
