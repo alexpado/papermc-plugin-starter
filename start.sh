@@ -28,4 +28,4 @@ if [[ ! -f "papermc.jar" ]]; then
   fi
 fi
 
-java -jar papermc.jar
+java -jar papermc.jar "$@"
