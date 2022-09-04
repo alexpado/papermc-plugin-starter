@@ -1,0 +1,21 @@
+version: '3'
+services:
+  minecraft:
+    env_file:
+      - .env
+    build:
+      context: docker
+      dockerfile: Dockerfile
+      args:
+        PAPER_VERSION: "${PAPER_VERSION}"
+        PAPER_BUILD: "${PAPER_BUILD}"
+    ports:
+      - "${MC_SERVER_PORT:-25565}:25565"
+      - "${MC_RCON_PORT:-25575}:25575"
+    volumes:
+      - 'minecraft:/var/minecraft'
+      - './build/libs:/var/minecraft/plugins'
+
+volumes:
+  minecraft:
+    driver: local

@@ -1,10 +1,11 @@
 WORKSPACE=".papermc"
-MC_VERSION="1.14.4"
-PAPER_BUILD="174"
 
 ## ============== DO NOT EDIT THE SCRIPT BELOW UNLESS YOU KNOW WHAT YOU ARE DOING ============== ##
 
-cd || exit # Moving to the user folder or exit if it fails.
+## Load env file if exists
+if [[ -f ".env" ]]; then
+  export $(cat .env | xargs)
+fi
 
 # Checking the workspace folder availability.
 if [ ! -d $WORKSPACE ]; then
@@ -12,14 +13,19 @@ if [ ! -d $WORKSPACE ]; then
   mkdir $WORKSPACE
 fi
 
-cd $WORKSPACE || exit # Moving to the workspace fodler or exit if it fails.
+cd $WORKSPACE || exit # Moving to the workspace folder or exit if it fails.
 
 # Check for the paper executable
-PAPER_JAR="paper-$MC_VERSION-$PAPER_BUILD.jar"
-PAPER_LNK="https://papermc.io/api/v1/paper/$MC_VERSION/$PAPER_BUILD/download"
-
-if [ ! -f $PAPER_JAR ]; then
-  wget -O $PAPER_JAR $PAPER_LNK
+if [[ ! -f "papermc.jar" ]]; then
+  if [[ ! -f "download-paper.sh" ]]; then
+    cp ../docker/scripts/download-paper.sh download-paper.sh
+  fi
+  ./download-paper.sh
+  rm download-paper.sh
+  if [[ $? -ne 0 ]]; then
+    echo "Something went wrong with the download script."
+    exit 1
+  fi
 fi
 
-java -jar $PAPER_JAR
+java -jar papermc.jar
