@@ -31,7 +31,7 @@ echo "Downloading build server file (from $DL_URL) ..."
 curl --silent $DL_URL --output papermc.jar
 
 echo "Cleaning up..."
-rm *.json
+rm build.json builds.json
 
 echo "Checking checksum..."
 echo "$MC_SHA256 papermc.jar" | sha256sum --check --status
